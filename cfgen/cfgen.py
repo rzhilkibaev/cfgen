@@ -1,6 +1,6 @@
 """
 Usage:
-    metaconfig FILE [list] [OPTIONS]
+    cfgen FILE [list] [OPTIONS]
 
 Commands:
     list          list variables and their values

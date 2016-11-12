@@ -1,13 +1,16 @@
 language: python
 python:
-- '2.7'
+  - '2.7'
+install:
+  - pip install --user .
+  - pip install --user -r requirements.txt  
 script:
-- touch foo
-deploy:
-  provider: pypitest
-  user: lord_business
-  password:
-    secure: EQUwCB3fLEDHYqvLfelAUdI0dhgAfTKsR1Jhj+NbjUZQ7Q8IHitGDxgk5U31qaTqQLPqci5orFy0PB+cIe8RF3mOm8s4d3M2zM7u4EFM33AaBdMFClH+D9bAjLg4IejNDZuzcQ0D3HQuHN+eARvKDFft5UPPJxbs4YfFyup0zxYJ1XFMNz50AJxc2h0NjzxpPlwzAJ4LU7t9/pcnid+/BxAgjo8AOdE9+G451TgEjG/X1CjZUo51Ep5T/SZ9oD+I4ZxZrY0hMkdeRTRKFochSrcxx1z19wdnmidk9vWlgOiCpZ3M19MApVrhQ/AoFuV+mCGJ/9gjnQF3FHDyMHQGCvVTpSESiZP60NEoyEjKWZTep3r/sEJ5cr0J7mytJUYgYooETvSa8TOcGhF38yKLb98nPYTrOp7/2IAb1tWSg0a2vynmkYaQZiHf+2KXqlWELbnhCsPIQWLPp3At/QjlZvxTvKuYnU4ss2pCrCymHaVpUCyE9YwzPLxzd/FjDyBCsJDdpZmwQPVF4NoRzuA9vtYcJMvzcfYb8R6cJ3Q3FQvxBS6MxpsTRloOz2uXs/XBsyp11UTLQbZ3zvTt+IRB9cGZiw/2tBksmWJFl2oDArgSBDGX1qdGEV98bPaewopWZG4yv2wCM05eB1BMPHzlTR8dqS5y6wyW0hf0IDFznxQ=
-  on:
-    tags: true
-    branch: master
+  - nosetests
+#deploy:
+#  provider: pypi
+#  user: lord_business
+#  password:
+#    secure: EQUwCB3fLEDHYqvLfelAUdI0dhgAfTKsR1Jhj+NbjUZQ7Q8IHitGDxgk5U31qaTqQLPqci5orFy0PB+cIe8RF3mOm8s4d3M2zM7u4EFM33AaBdMFClH+D9bAjLg4IejNDZuzcQ0D3HQuHN+eARvKDFft5UPPJxbs4YfFyup0zxYJ1XFMNz50AJxc2h0NjzxpPlwzAJ4LU7t9/pcnid+/BxAgjo8AOdE9+G451TgEjG/X1CjZUo51Ep5T/SZ9oD+I4ZxZrY0hMkdeRTRKFochSrcxx1z19wdnmidk9vWlgOiCpZ3M19MApVrhQ/AoFuV+mCGJ/9gjnQF3FHDyMHQGCvVTpSESiZP60NEoyEjKWZTep3r/sEJ5cr0J7mytJUYgYooETvSa8TOcGhF38yKLb98nPYTrOp7/2IAb1tWSg0a2vynmkYaQZiHf+2KXqlWELbnhCsPIQWLPp3At/QjlZvxTvKuYnU4ss2pCrCymHaVpUCyE9YwzPLxzd/FjDyBCsJDdpZmwQPVF4NoRzuA9vtYcJMvzcfYb8R6cJ3Q3FQvxBS6MxpsTRloOz2uXs/XBsyp11UTLQbZ3zvTt+IRB9cGZiw/2tBksmWJFl2oDArgSBDGX1qdGEV98bPaewopWZG4yv2wCM05eB1BMPHzlTR8dqS5y6wyW0hf0IDFznxQ=
+#  on:
+#    tags: true
+#    branch: master

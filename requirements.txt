@@ -1,3 +1,4 @@
 docopt
 future
 jinja2
+nose
