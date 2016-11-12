@@ -151,8 +151,10 @@ def parse_metaconfig_line(line):
     """ Parses line and return key=value tuple """
     delimiter_pos = line.find("=")
     if delimiter_pos == -1:
-        raise ValueError("Cannot parse metaconfig line; line=" + line)
+        raise ValueError("'=' not found in metaconfig line " + line)
     var_name = line[:delimiter_pos].strip()
+    if len(var_name) == 0:
+        raise ValueError("variable name not found in metaconfig line " + line)
     var_expr = line[delimiter_pos + 1:].strip()
     return var_name, var_expr
 
