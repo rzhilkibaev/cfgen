@@ -3,14 +3,14 @@ python:
   - '2.7'
 install:
   - pip install .
-  - pip install -r requirements.txt  
+  - pip install -r requirements.txt
 script:
   - nosetests
-#deploy:
-#  provider: pypi
-#  user: lord_business
-#  password:
-#    secure: EQUwCB3fLEDHYqvLfelAUdI0dhgAfTKsR1Jhj+NbjUZQ7Q8IHitGDxgk5U31qaTqQLPqci5orFy0PB+cIe8RF3mOm8s4d3M2zM7u4EFM33AaBdMFClH+D9bAjLg4IejNDZuzcQ0D3HQuHN+eARvKDFft5UPPJxbs4YfFyup0zxYJ1XFMNz50AJxc2h0NjzxpPlwzAJ4LU7t9/pcnid+/BxAgjo8AOdE9+G451TgEjG/X1CjZUo51Ep5T/SZ9oD+I4ZxZrY0hMkdeRTRKFochSrcxx1z19wdnmidk9vWlgOiCpZ3M19MApVrhQ/AoFuV+mCGJ/9gjnQF3FHDyMHQGCvVTpSESiZP60NEoyEjKWZTep3r/sEJ5cr0J7mytJUYgYooETvSa8TOcGhF38yKLb98nPYTrOp7/2IAb1tWSg0a2vynmkYaQZiHf+2KXqlWELbnhCsPIQWLPp3At/QjlZvxTvKuYnU4ss2pCrCymHaVpUCyE9YwzPLxzd/FjDyBCsJDdpZmwQPVF4NoRzuA9vtYcJMvzcfYb8R6cJ3Q3FQvxBS6MxpsTRloOz2uXs/XBsyp11UTLQbZ3zvTt+IRB9cGZiw/2tBksmWJFl2oDArgSBDGX1qdGEV98bPaewopWZG4yv2wCM05eB1BMPHzlTR8dqS5y6wyW0hf0IDFznxQ=
-#  on:
-#    tags: true
-#    branch: master
+deploy:
+  provider: pypi
+  user: lord_business
+  password:
+    secure: F5vXa0in9u/9WRzXLhfFyHEA4JEs9YGspwaori3hoxo6C6OvxyFCDzkQyiaAKTQn7dtHfy+aRgtBhujfplWr/8//td6836ShEryT4wic1sAPg0kEOJslZcIgROKHx882ekbK7x492gd3g/DCb9f9+wjEa6Np8UEby/O9MDAZlvJyv5+AA5EuIXzC2Yjp4bYSzuffeeERjZzwCH4DSbpungcROYoG47OjY7T2xS1LnsGl7jkclL8NTxpBak4snS+vWELUm0S4Jg+B4MJqYLWsDK7l0ZeLugLF62lmY8C0L0B7+8Lf5l0lVntS7D8K+jzHCIjok2bRv6tl6LoYfBnGqRtLNLYY2G6sLQ5/RAIDfuNni76f8Oa95pqulRbg411S78M20fdJJk5T+JQ6IgiH0PIth9VUwFdUj6YQ2tcdABIyjDvKMU46XP5sOt7Nyxya07u5Vm6ElvVOjkKFI0p+4ODBW2RS2a+dECOeKNzdDjxzWoNQXz0sbzEMFANb5ogfWYD92RnbMbZuBk15M5Hj8r2YFzvfl4iSztqY+LHkk+u7eheLC3S6sXjH8AHYTkasgAimFFBoZpo3gW+SKo7gTqTApcMXoVl34RuN0m9gqetzIAs7S0Z3VCBFtIrKEM6Wa8pTQ+RuO5Mq1OPynAoxEiyGUpDPJrEMpeUUxKJEiyY=
+  on:
+    tags: true
+    branch: master
