@@ -52,7 +52,8 @@ _target_template_file_extension = ".template"
 _metaconfig_cache_file_extension = _metaconfig_file_extension + ".cache"
 
 
-def main(args):
+def main():
+    args = docopt.docopt(__doc__)
     target_file = args["FILE"]
     if args["list"]:
         cmd_list(target_file)
@@ -182,5 +183,4 @@ def get_string(value):
 
 
 if __name__ == '__main__':
-    args = docopt.docopt(__doc__)
-    main(args)
+    main()
