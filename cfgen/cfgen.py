@@ -46,7 +46,6 @@ from jinja2.loaders import FileSystemLoader
 
 import future.utils
 import sys
-from subprocess import CalledProcessError
 
 
 _metaconfig_file_extension = ".metaconfig"
