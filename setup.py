@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="metaconfig",
+    name="metcon",
     version="0.0.1.dev1",
     description="Configuration tool for configuration files",
     author="Renat Zhilkibaev",
