@@ -45,6 +45,8 @@ import jinja2
 from jinja2.loaders import FileSystemLoader
 
 import future.utils
+import sys
+from subprocess import CalledProcessError
 
 
 _metaconfig_file_extension = ".metaconfig"
@@ -139,11 +141,15 @@ def load_metaconfig(file_path):
 
 def evaluate_expression(var_expression):
     """ Evaluates given expression """
-    completed_process = subprocess.check_output(var_expression,
-                                       shell=True,
-                                       universal_newlines=True)
-
-    return get_string(completed_process).rstrip()
+    try:
+        completed_process = subprocess.check_output(var_expression,
+                                           shell=True,
+                                           universal_newlines=True)
+    
+        return get_string(completed_process).rstrip()
+    except:
+        e = sys.exc_info()[1]
+        future.utils.raise_from(ValueError("Cannot evaluate expression " + var_expression), e)
 
 
 def parse_metaconfig_line(line):
