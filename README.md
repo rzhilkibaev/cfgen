@@ -42,3 +42,11 @@ List variable names (one per line) you want to cache in `build.cfg.metaconfig.ca
 `cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `build.cfg.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge  them all. While merging variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a project.
 ## template file hierarchy
 Similarly a template file is looked for howerver only the last one is used.
+## jinja2 templates
+Template files are jinja2 templates
+## context aware evaluation
+The variables defined in metaconfig files can be used as environment variables in followng defenitions.
+```
+current_branch = git rev-parse --abbrev-ref HEAD
+binary_name = echo "myapp_${current_branch}.jar"
+```
