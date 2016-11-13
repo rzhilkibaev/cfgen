@@ -27,7 +27,6 @@ The tool will evaluate contents of `build.cfg.metaconfig` executing `git rev-par
 # Installation
 ```
 $ sudo pip install cfgen
-$ sudo pip wheel cfgen
 ```
 The fist command installs the python module, the seconde one installs `cfgen` script.
 
