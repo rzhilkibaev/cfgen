@@ -39,18 +39,18 @@ from __future__ import print_function
 from collections import OrderedDict
 import os
 import subprocess
+import sys
 
 import docopt
+import future.utils
 import jinja2
 from jinja2.loaders import FileSystemLoader
-
-import future.utils
-import sys
 
 
 _metaconfig_file_extension = ".metaconfig"
 _target_template_file_extension = ".template"
 _metaconfig_cache_file_extension = _metaconfig_file_extension + ".cache"
+_metaconfig_nocache_file_extension = _metaconfig_file_extension + ".nocache"
 
 
 def main():
@@ -76,9 +76,9 @@ def cmd_write(target_file_name):
     values = evaluate_expressions(expressions, values)
     rendered = render_template(target_file_name, values)
     with open(target_file_name, "w") as f:
-        print(rendered, file=f)
+        print(rendered, end="", file=f)
     # cache at the end of successful write
-    cache_values(values, get_metaconfig_cache_file_name(target_file_name))
+    cache_values(values, get_metaconfig_cache_file_name(target_file_name), get_metaconfig_nocache_file_name(target_file_name))
 
 
 def render_template(target_file_name, values):
@@ -96,10 +96,14 @@ def load_all(target_file_name):
     return expressions, values
 
 
-def cache_values(definitions, file_name):
-    with open(file_name, "w") as f:
+def cache_values(definitions, cache_file_name, nocache_file_name):
+    with open(nocache_file_name) as f:
+        nocache_var_names = f.read().splitlines()
+        
+    with open(cache_file_name, "w") as f:
         for name, value in definitions.items():
-            print(name + " = " + value, file=f)
+            if not name in nocache_var_names:
+                print(name + " = " + value, file=f)
 
 
 def load_metaconfigs(file_name):
@@ -133,30 +137,33 @@ def load_metaconfig(file_path):
                     var_name, var_expression = parse_metaconfig_line(line)
                     definitions[var_name] = var_expression
                 except ValueError as e:
-                    future.utils.raise_from(ValueError("Cannot parse metaconfig; file=" + file_path), e)
+                    future.utils.raise_from(
+                        ValueError("Cannot parse metaconfig; file=" + file_path), e)
 
     return definitions
+
 
 def evaluate_expressions(expressions, values):
     for var_name, var_expression in expressions.items():
         if not var_name in values:
             values[var_name] = evaluate_expression(var_expression, values)
-    
+
     return values
-            
+
 
 def evaluate_expression(var_expression, eval_env):
     """ Evaluates given expression """
     try:
         completed_process = subprocess.check_output(var_expression,
-                                           env=eval_env,
-                                           shell=True,
-                                           universal_newlines=True)
-    
+                                                    env=eval_env,
+                                                    shell=True,
+                                                    universal_newlines=True)
+
         return get_string(completed_process).rstrip()
     except:
         e = sys.exc_info()[1]
-        future.utils.raise_from(ValueError("Cannot evaluate expression " + var_expression), e)
+        future.utils.raise_from(
+            ValueError("Cannot evaluate expression " + var_expression), e)
 
 
 def parse_metaconfig_line(line):
@@ -186,6 +193,10 @@ def get_target_template_file_name(target_file_name):
 
 def get_metaconfig_cache_file_name(target_file_name):
     return target_file_name + _metaconfig_cache_file_extension
+
+
+def get_metaconfig_nocache_file_name(target_file_name):
+    return target_file_name + _metaconfig_nocache_file_extension
 
 
 def get_string(value):
