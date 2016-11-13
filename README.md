@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/rzhilkibaev/cfgen.png?branch=master)](https://travis-ci.org/rzhilkibaev/cfgen)
 
 # cfgen
-This tool allows you to generate a config file from a template and source configuration files. Variables in the source configuration files are evaluated every time the tool is executed which allows you to resolve them dynamically.
+This tool allows you to generate a config file from a template and source configuration files. Variables in the source configuration files are evaluated every time the tool is executed which allows you to resolve them dynamically yousing system shell.
 
 # Problem
 You need to run a build tool `build` that requires a configuration file `build.cfg`.
@@ -22,7 +22,7 @@ current_branch = git rev-parse --abbrev-ref HEAD
 branch = {{ current_branch }}
 ```
 Run `$ cfgen build.cfg`
-The tool will evaluate contents of `build.cfg.metaconfig` and then write `build.cfg` using `build.cfg.template` as a template. These files can be commited into git so you need to create them only once.
+The tool will evaluate contents of `build.cfg.metaconfig` executing `git rev-parse --abbrev-ref HEAD` in the system shell and then write `build.cfg` using `build.cfg.template` as a template. These files can be commited into git so you need to create them only once.
 
 # Installation
 ```
@@ -36,6 +36,7 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 `$ cfgen --help`
 
 # Features
-- cache
-- source configuration file hierarchy
-- uses shell to evaluate variables
+## cache
+List variable names (one per line) you want to cache in `build.cfg.metaconfig.caching`. They will be cached between executions in `build.cfg.metaconfig.cache`. Useful for variables that require user input but don't need to be evaluated for each execution.
+## metaconfig file hierarchy
+`cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `build.cfg.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge  them all. While merging variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a project.
