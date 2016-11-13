@@ -1,3 +1,3 @@
 var_to_be_overriden = echo var_overriden
 var_dependent_on_another = echo another_var_value_is_$var_to_be_overriden
-var_no_cache = echo no_cache
+var_cache = echo cache

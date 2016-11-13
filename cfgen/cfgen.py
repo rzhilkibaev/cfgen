@@ -50,7 +50,7 @@ from jinja2.loaders import FileSystemLoader
 _metaconfig_file_extension = ".metaconfig"
 _target_template_file_extension = ".template"
 _metaconfig_cache_file_extension = _metaconfig_file_extension + ".cache"
-_metaconfig_nocache_file_extension = _metaconfig_file_extension + ".nocache"
+_metaconfig_caching_file_extension = _metaconfig_file_extension + ".caching"
 
 
 def main():
@@ -78,7 +78,7 @@ def cmd_write(target_file_name):
     with open(target_file_name, "w") as f:
         print(rendered, end="", file=f)
     # cache at the end of successful write
-    cache_values(values, get_metaconfig_cache_file_name(target_file_name), get_metaconfig_nocache_file_name(target_file_name))
+    cache_values(values, get_metaconfig_cache_file_name(target_file_name), get_metaconfig_caching_file_name(target_file_name))
 
 
 def render_template(target_file_name, values):
@@ -96,13 +96,13 @@ def load_all(target_file_name):
     return expressions, values
 
 
-def cache_values(definitions, cache_file_name, nocache_file_name):
-    with open(nocache_file_name) as f:
-        nocache_var_names = f.read().splitlines()
+def cache_values(definitions, cache_file_name, caching_file_name):
+    with open(caching_file_name) as f:
+        caching_var_names = f.read().splitlines()
         
     with open(cache_file_name, "w") as f:
         for name, value in definitions.items():
-            if not name in nocache_var_names:
+            if name in caching_var_names:
                 print(name + " = " + value, file=f)
 
 
@@ -195,8 +195,8 @@ def get_metaconfig_cache_file_name(target_file_name):
     return target_file_name + _metaconfig_cache_file_extension
 
 
-def get_metaconfig_nocache_file_name(target_file_name):
-    return target_file_name + _metaconfig_nocache_file_extension
+def get_metaconfig_caching_file_name(target_file_name):
+    return target_file_name + _metaconfig_caching_file_extension
 
 
 def get_string(value):

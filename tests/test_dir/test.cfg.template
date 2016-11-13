@@ -1,4 +1,4 @@
 var_from_root_config = {{ var_from_root_config }}
 var_to_be_overriden = {{ var_to_be_overriden }}
 var_dependent_on_another = {{ var_dependent_on_another }}
-var_no_cache = {{ var_no_cache }}
+var_cache = {{ var_cache }}
