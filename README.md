@@ -36,5 +36,6 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 `$ cfgen --help`
 
 # Features
+- cache
 - source configuration file hierarchy
 - uses shell to evaluate variables
