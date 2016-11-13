@@ -3,7 +3,8 @@ from nose.tools import assert_equals
 import os
 
 def setup():
-    os.chdir("test_dir")
+    test_root_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(test_root_dir + "/test_dir")
     clean()
     
 
