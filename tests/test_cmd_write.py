@@ -11,19 +11,31 @@ def setup():
 def test_cmd_write():
     cfgen.cmd_write("test.cfg")
     
-    with open("test.cfg") as actual, open("test.cfg.expected") as expected:
-            actual_lines = actual.read().splitlines()
-            expected_lines = expected.read().splitlines()
+    # check target file
+    actual_target_lines, expected_target_lines = get_file_lines("test.cfg", "test.cfg.expected")
+    assert_lines_equal(actual_target_lines, expected_target_lines)
 
-    assert_equals(len(actual_lines), len(expected_lines))
-    
-    for line_number in range(0, len(actual_lines)):
-        assert_equals(actual_lines[line_number], expected_lines[line_number])
+    # check cache
+    actual_cache_lines, expected_cache_lines = get_file_lines("test.cfg.metaconfig.cache", "test.cfg.metaconfig.cache.expected")
+    assert_lines_equal(actual_cache_lines, expected_cache_lines)
 
+   
     
 def clean():
     if os.path.isfile("test.cfg"):
         os.remove("test.cfg")
     if os.path.isfile("test.cfg.metaconfig.cache"):
         os.remove("test.cfg.metaconfig.cache")
-    
+
+def get_file_lines(filename1, filename2):
+    with open(filename1) as f1, open(filename2) as f2:
+        f1_lines = f1.read().splitlines()
+        f2_lines = f2.read().splitlines()
+    return f1_lines, f2_lines
+
+
+def assert_lines_equal(lines1, lines2):
+    assert_equals(len(lines1), len(lines2))
+    for line_number in range(0, len(lines1)):
+        assert_equals(lines1[line_number], lines2[line_number])
+

@@ -1,0 +1,3 @@
+var_from_root_config = var_from_root_config
+var_to_be_overriden = var_overriden
+var_dependent_on_another = another_var_value_is_var_overriden

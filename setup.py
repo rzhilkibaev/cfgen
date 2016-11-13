@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="cfgen",
-    version="0.0.1.dev4",
+    version="0.0.1.dev5",
     description="Configuration tool for configuration files",
     author="Renat Zhilkibaev",
     author_email="rzhilkibaev@gmail.com",
