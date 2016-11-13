@@ -40,3 +40,5 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 List variable names (one per line) you want to cache in `build.cfg.metaconfig.caching`. They will be cached between executions in `build.cfg.metaconfig.cache`. Useful for variables that require user input but don't need to be evaluated for each execution.
 ## metaconfig file hierarchy
 `cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `build.cfg.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge  them all. While merging variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a project.
+## template file hierarchy
+Similarly a template file is looked for howerver only the last one is used.
