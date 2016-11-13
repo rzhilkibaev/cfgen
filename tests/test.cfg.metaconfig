@@ -1,0 +1,2 @@
+var_from_root_config = echo var_from_root_config
+var_to_be_overriden = echo ERROR_var_expected_to_be_overriden

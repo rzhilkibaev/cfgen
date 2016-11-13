@@ -1,4 +1,6 @@
-test.*
+test.cfg
+test.cfg.metaconfig.cache
+
 venv*
 
 # Byte-compiled / optimized / DLL files
@@ -94,3 +96,4 @@ ENV/
 # eclipse
 .project
 .pydevproject
+.settings

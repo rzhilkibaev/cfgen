@@ -72,7 +72,8 @@ def cmd_list(target_file_name):
 def cmd_write(target_file_name):
     if os.path.exists(target_file_name):
         raise ValueError(target_file_name + " already exists")
-    values = load_all(target_file_name)
+    expressions, values = load_all(target_file_name)
+    values = evaluate_expressions(expressions, values)
     rendered = render_template(target_file_name, values)
     with open(target_file_name, "w") as f:
         print(rendered, file=f)
@@ -91,9 +92,8 @@ def render_template(target_file_name, values):
 def load_all(target_file_name):
     expressions = load_metaconfigs(get_metaconfig_file_name(target_file_name))
     values = load_metaconfig(get_metaconfig_cache_file_name(target_file_name))
-    expressions.update(values)
 
-    return expressions
+    return expressions, values
 
 
 def cache_values(definitions, file_name):
@@ -137,11 +137,19 @@ def load_metaconfig(file_path):
 
     return definitions
 
+def evaluate_expressions(expressions, values):
+    for var_name, var_expression in expressions.items():
+        if not var_name in values:
+            values[var_name] = evaluate_expression(var_expression, values)
+    
+    return values
+            
 
-def evaluate_expression(var_expression):
+def evaluate_expression(var_expression, eval_env):
     """ Evaluates given expression """
     try:
         completed_process = subprocess.check_output(var_expression,
+                                           env=eval_env,
                                            shell=True,
                                            universal_newlines=True)
     
