@@ -14,7 +14,7 @@ Every time you switch between branches you need to modify this file. Not fun whe
 # Solution
 In this particular case you need to create `build.cfg.metaconfig`
 ```
-current_branch = $(git rev-parse --abbrev-ref HEAD)
+current_branch = git rev-parse --abbrev-ref HEAD
 ```
 `build.cfg.template`
 ```
