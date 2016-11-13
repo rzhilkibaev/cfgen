@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="cfgen",
-    version="0.1.0",
+    version="0.1.1",
     description="Configuration tool for configuration files",
     author="Renat Zhilkibaev",
     author_email="rzhilkibaev@gmail.com",
@@ -10,5 +10,15 @@ setup(
     url="https://github.com/rzhilkibaev/cfgen",
     packages=["cfgen"],
     install_requires=["docopt", "future", "jinja2"],
-    entry_points={"console_scripts": ["cfgen=cfgen.cfgen:main"]},
+    scripts=["bin/cfgen"],
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python :: 2.7",
+        "Topic :: Utilities",
+        ],
 )
