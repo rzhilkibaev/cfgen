@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rzhilkibaev/metaconfig.png?branch=master)](https://travis-ci.org/rzhilkibaev/metaconfig)
+[![Build Status](https://travis-ci.org/rzhilkibaev/cfgen.png?branch=master)](https://travis-ci.org/rzhilkibaev/cfgen)
 
 # cfgen
 This tool allows you to generate a config file from a template and source configuration files. Variables in the source coingiguration files are evaluated every time the tool is executed which allows you to resolve them dynamically.
