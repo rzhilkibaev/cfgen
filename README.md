@@ -27,7 +27,6 @@ The tool will evaluate contents of `build.cfg.metaconfig` executing `git rev-par
 # Installation
 ```
 $ sudo pip install cfgen
-$ sudo pip wheel cfgen
 ```
 The fist command installs the python module, the seconde one installs `cfgen` script.
 
@@ -49,4 +48,9 @@ The variables defined in metaconfig files can be used as environment variables i
 ```
 current_branch = git rev-parse --abbrev-ref HEAD
 binary_name = echo "myapp_${current_branch}.jar"
+```
+## shell evaluation
+Since variables are evaluated with system shell you can use all shell features. Here is an example of setting `aws_profile` variable from user input:
+```
+aws_profile = /bin/bash -c 'read -p "Enter AWS profile: " aws_profile && echo $aws_profile'
 ```
