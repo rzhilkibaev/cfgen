@@ -82,11 +82,29 @@ def cmd_write(target_file_name):
 
 
 def render_template(target_file_name, values):
-    env = jinja2.Environment(loader=FileSystemLoader("."),
+    env = jinja2.Environment(loader=FileSystemLoader("/"),
                              undefined=jinja2.runtime.StrictUndefined)
     template_file_name = get_target_template_file_name(target_file_name)
 
-    return env.get_template(template_file_name).render(values)
+    return env.get_template(lookup_template_file(template_file_name)).render(values)
+
+
+def lookup_template_file(template_file_name):
+    template_file_path = None
+    directory_path = ""
+    for directory_name in get_current_path_elements():
+
+        directory_path += os.sep + directory_name
+
+        template_file_path_candidate = directory_path + os.sep + template_file_name
+        if os.path.isfile(template_file_path_candidate):
+            # last one will win
+            template_file_path = template_file_path_candidate
+            
+    if not template_file_path:
+        raise ValueError("Template file not found " + template_file_name)
+    
+    return template_file_path
 
 
 def load_all(target_file_name):
