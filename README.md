@@ -50,7 +50,7 @@ current_branch = git rev-parse --abbrev-ref HEAD
 binary_name = echo "myapp_${current_branch}.jar"
 ```
 ## shell evaluation
-Since variables are evaluated with system shell you can use all shell features. Here is an example of setting `aws_profile` variable:
+Since variables are evaluated with system shell you can use all shell features. Here is an example of setting `aws_profile` variable from user input:
 ```
 aws_profile = /bin/bash -c 'read -p "Enter AWS profile: " aws_profile && echo $aws_profile'
 ```
