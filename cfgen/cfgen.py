@@ -46,12 +46,11 @@ import future.utils
 import jinja2
 from jinja2.loaders import FileSystemLoader
 
-
-_metaconfig_file_extension = ".metaconfig"
-_metaconfig_file_name = "cfgen" + _metaconfig_file_extension
+_prg_name = "cfgen"
+_metaconfig_file_name = _prg_name + ".metaconfig"
 _target_template_file_extension = ".template"
-_metaconfig_cache_file_extension = _metaconfig_file_extension + ".cache"
-_metaconfig_caching_file_extension = _metaconfig_file_extension + ".caching"
+_metaconfig_cache_file_name = "." + _prg_name + ".cache"
+_metaconfig_caching_file_name = _prg_name + ".caching"
 
 
 def main():
@@ -79,7 +78,7 @@ def cmd_write(target_file_name):
     with open(target_file_name, "w") as f:
         print(rendered, end="", file=f)
     # cache at the end of successful write
-    cache_values(values, get_metaconfig_cache_file_name(target_file_name), get_metaconfig_caching_file_name(target_file_name))
+    cache_values(values, _metaconfig_cache_file_name, _metaconfig_caching_file_name)
 
 
 def render_template(target_file_name, values):
@@ -110,7 +109,7 @@ def lookup_template_file(template_file_name):
 
 def load_all(target_file_name):
     expressions = load_metaconfigs()
-    values = load_metaconfig(get_metaconfig_cache_file_name(target_file_name))
+    values = load_metaconfig(_metaconfig_cache_file_name)
 
     return expressions, values
 
@@ -204,14 +203,6 @@ def get_current_path_elements():
 
 def get_target_template_file_name(target_file_name):
     return target_file_name + _target_template_file_extension
-
-
-def get_metaconfig_cache_file_name(target_file_name):
-    return target_file_name + _metaconfig_cache_file_extension
-
-
-def get_metaconfig_caching_file_name(target_file_name):
-    return target_file_name + _metaconfig_caching_file_extension
 
 
 def get_string(value):

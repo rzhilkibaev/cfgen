@@ -12,7 +12,7 @@ branch = bug-111
 Every time you switch between branches you need to modify this file. Not fun when you do it several times in a day.
 
 # Solution
-In this particular case you need to create `build.cfg.metaconfig`
+In this particular case you need to create `cfgen.metaconfig`
 ```
 current_branch = git rev-parse --abbrev-ref HEAD
 ```
@@ -22,7 +22,7 @@ current_branch = git rev-parse --abbrev-ref HEAD
 branch = {{ current_branch }}
 ```
 Run `$ cfgen build.cfg`
-The tool will evaluate contents of `build.cfg.metaconfig` executing `git rev-parse --abbrev-ref HEAD` in the system shell and then write `build.cfg` using `build.cfg.template` as a template. These files can be commited into git so you need to create them only once.
+The tool will evaluate contents of `cfgen.metaconfig` executing `git rev-parse --abbrev-ref HEAD` in the system shell and then write `build.cfg` using `build.cfg.template` as a template. These files can be commited into git so you need to create them only once.
 
 # Installation
 ```
@@ -36,9 +36,9 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 
 # Features
 ## cache
-List variable names (one per line) you want to cache in `build.cfg.metaconfig.caching`. They will be cached between executions in `build.cfg.metaconfig.cache`. Useful for variables that require user input but don't need to be evaluated for each execution.
+List variable names (one per line) you want to cache in `cfgen.caching`. They will be cached between executions in `.cfgen.cache`. Useful for variables that require user input but don't need to be evaluated for each execution.
 ## metaconfig file hierarchy
-`cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `build.cfg.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge  them all. While merging variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a project.
+`cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `cfgen.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge them all. While merging, the variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a subdirectory.
 ## template file hierarchy
 Similarly a template file is looked for howerver only the last one is used.
 ## jinja2 templates

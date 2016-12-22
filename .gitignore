@@ -1,5 +1,5 @@
 test.cfg
-test.cfg.metaconfig.cache
+.cfgen.cache
 
 venv*
 

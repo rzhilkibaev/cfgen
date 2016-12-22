@@ -16,16 +16,15 @@ def test_cmd_write():
     assert_lines_equal(actual_target_lines, expected_target_lines)
 
     # check cache
-    actual_cache_lines, expected_cache_lines = get_file_lines("test.cfg.metaconfig.cache", "test.cfg.metaconfig.cache.expected")
+    actual_cache_lines, expected_cache_lines = get_file_lines(".cfgen.cache", "cfgen.cache.expected")
     assert_lines_equal(actual_cache_lines, expected_cache_lines)
 
-   
     
 def clean():
     if os.path.isfile("test.cfg"):
         os.remove("test.cfg")
-    if os.path.isfile("test.cfg.metaconfig.cache"):
-        os.remove("test.cfg.metaconfig.cache")
+    if os.path.isfile(".cfgen.cache"):
+        os.remove(".cfgen.cache")
 
 def get_file_lines(filename1, filename2):
     with open(filename1) as f1, open(filename2) as f2:
