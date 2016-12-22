@@ -9,11 +9,11 @@ Options:
     --force   overwrite existing file
 
 metaconfig cache
-*.metaconfig.cache
+.cfgen.cache
 <variable_name> = <value>
 
 metaconfig file
-*.metaconfig
+cfgen.metaconfig
 <variable_name> = <shell_command>
 
 *.template
