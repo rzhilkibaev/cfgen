@@ -48,6 +48,7 @@ from jinja2.loaders import FileSystemLoader
 
 
 _metaconfig_file_extension = ".metaconfig"
+_metaconfig_file_name = "cfgen" + _metaconfig_file_extension
 _target_template_file_extension = ".template"
 _metaconfig_cache_file_extension = _metaconfig_file_extension + ".cache"
 _metaconfig_caching_file_extension = _metaconfig_file_extension + ".caching"
@@ -108,7 +109,7 @@ def lookup_template_file(template_file_name):
 
 
 def load_all(target_file_name):
-    expressions = load_metaconfigs(get_metaconfig_file_name(target_file_name))
+    expressions = load_metaconfigs()
     values = load_metaconfig(get_metaconfig_cache_file_name(target_file_name))
 
     return expressions, values
@@ -124,7 +125,7 @@ def cache_values(definitions, cache_file_name, caching_file_name):
                 print(name + " = " + value, file=f)
 
 
-def load_metaconfigs(file_name):
+def load_metaconfigs():
     """ Loads all metaconfig files and returns merged variable to expression dictionary """
     definitions = OrderedDict()
     directory_path = ""
@@ -132,7 +133,7 @@ def load_metaconfigs(file_name):
 
         directory_path += os.sep + directory_name
 
-        metaconfig_file_path = directory_path + os.sep + file_name
+        metaconfig_file_path = directory_path + os.sep + _metaconfig_file_name
         definitions.update(load_metaconfig(metaconfig_file_path))
 
     return definitions
@@ -199,10 +200,6 @@ def parse_metaconfig_line(line):
 def get_current_path_elements():
     # first element is empty, remove it
     return os.getcwd().split(os.sep)[1:]
-
-
-def get_metaconfig_file_name(target_file_name):
-    return target_file_name + _metaconfig_file_extension
 
 
 def get_target_template_file_name(target_file_name):
