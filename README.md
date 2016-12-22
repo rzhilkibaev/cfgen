@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/rzhilkibaev/cfgen.png?branch=master)](https://travis-ci.org/rzhilkibaev/cfgen)
 
 # cfgen
-This tool allows you to generate a config file from a template and source configuration files. Variables in the source configuration files are evaluated every time the tool is executed which allows you to resolve them dynamically yousing system shell.
+This tool allows you to generate a config file from a template and source configuration files. Variables in the source configuration files are evaluated every time the tool is executed which allows you to resolve them dynamically using system shell.
 
 # Problem
 You need to run a build tool `build` that requires a configuration file `build.cfg`.
