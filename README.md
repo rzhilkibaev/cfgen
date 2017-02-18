@@ -36,16 +36,18 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 `$ cfgen --help`
 
 # Features
-## cache
-List variable names (one per line) you want to cache in `cfgen.caching`. They will be cached between executions in `.cfgen.cache`. Useful for variables that require user input but don't need to be evaluated for each execution.
+
 ## metaconfig file hierarchy
 `cfgen` looks for metaconfig files starting from the root directory down to the current one. It merges content with last variable defenition winning. For instance if you run `cfgen build.cfg` from `/home/me/git/myproject` it will look for `cfgen.metaconfig` in `/home`, `/home/me`, `/home/me/git`, `/home/me/git/myproject` in that order. It will loadd and merge them all. While merging, the variables loaded later override the same variables loaded earlier. This allows you to set a global variable with some default value and override it in a subdirectory.
+
 ## template file hierarchy
-Similarly a template file is looked for howerver only the last one is used.
+Similarly a template file is looked for however only the last one is used.
+
 ## jinja2 templates
-Template files are jinja2 templates
+Template files are [Jinja2](http://jinja.pocoo.org/) templates.
+
 ## context aware evaluation
-The variables defined in metaconfig files can be used as environment variables in followng defenitions.
+The variables defined in metaconfig files can be used as environment variables in the followng defenitions:
 ```
 current_branch = git rev-parse --abbrev-ref HEAD
 binary_name = echo "myapp_${current_branch}.jar"
@@ -55,3 +57,8 @@ Since variables are evaluated with system shell you can use all shell features. 
 ```
 aws_profile = /bin/bash -c 'read -p "Enter AWS profile: " aws_profile && echo $aws_profile'
 ```
+Use with caching (see below).
+
+## caching
+You can cache resulsts of evaluations. This is useful when evaluation is slow or requires user input.
+List variable names (one per line) you want to cache in `cfgen.caching`. For these variables `cfgen` executes evaluation on first run, caches the results in `.cfgen.cache` and uses the cached result in subsecquent runs.
