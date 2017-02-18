@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/rzhilkibaev/cfgen.png?branch=master)](https://travis-ci.org/rzhilkibaev/cfgen)
+[![PyPI version](https://badge.fury.io/py/cfgen.svg)](https://pypi.python.org/pypi/cfgen)
 
 # cfgen
 This tool allows you to generate a config file from a template and source configuration files. Variables in the source configuration files are evaluated every time the tool is executed which allows you to resolve them dynamically using system shell.
