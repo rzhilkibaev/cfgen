@@ -60,5 +60,5 @@ aws_profile = /bin/bash -c 'read -p "Enter AWS profile: " aws_profile && echo $a
 Use with caching (see below).
 
 ## caching
-You can cache resulsts of evaluations. This is useful when evaluation is slow or requires user input.
-List variable names (one per line) you want to cache in `cfgen.caching`. For these variables `cfgen` executes evaluation on first run, caches the results in `.cfgen.cache` and uses the cached result in subsecquent runs.
+You can cache results of evaluation. This is useful when evaluation is slow or requires user input.
+List variable names (one per line) you want to cache in `cfgen.caching`. For these variables `cfgen` executes evaluation on the first run, caches the results in `.cfgen.cache` and uses the cached result in subsecquent runs.
