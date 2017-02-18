@@ -43,7 +43,7 @@ The fist command installs the python module, the seconde one installs `cfgen` sc
 ## template file hierarchy
 Similarly a template file is looked for however only the last one is used.
 
-## jinja2 templates
+## Jinja2 templates
 Template files are [Jinja2](http://jinja.pocoo.org/) templates.
 
 ## context aware evaluation
