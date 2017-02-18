@@ -115,13 +115,16 @@ def load_all(target_file_name):
 
 
 def cache_values(definitions, cache_file_name, caching_file_name):
-    with open(caching_file_name) as f:
-        caching_var_names = f.read().splitlines()
+    # read what needs to be cahed
+    if os.path.exists(caching_file_name):
+        with open(caching_file_name) as f:
+            caching_var_names = f.read().splitlines()
         
-    with open(cache_file_name, "w") as f:
-        for name, value in definitions.items():
-            if name in caching_var_names:
-                print(name + " = " + value, file=f)
+        # cache
+        with open(cache_file_name, "w") as f:
+            for name, value in definitions.items():
+                if name in caching_var_names:
+                    print(name + " = " + value, file=f)
 
 
 def load_metaconfigs():
