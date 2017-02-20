@@ -9,7 +9,7 @@ def setup():
     
 
 def test_cmd_write():
-    cfgen.cmd_write("test.cfg")
+    cfgen.cmd_write("test.cfg", None)
     
     # check target file
     actual_target_lines, expected_target_lines = get_file_lines("test.cfg", "test.cfg.expected")
