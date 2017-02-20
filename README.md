@@ -55,9 +55,12 @@ binary_name = echo "myapp_${current_branch}.jar"
 ## shell evaluation
 Since variables are evaluated with system shell you can use all shell features. Here is an example of setting `aws_profile` variable from user input:
 ```
-aws_profile = /bin/bash -c 'read -p "Enter AWS profile: " aws_profile && echo $aws_profile'
+aws_profile = /bin/bash -e -o pipefail -c 'read -p "Enter AWS profile: " aws_profile && echo $aws_profile'
 ```
-Use with caching (see below).
+`-o pipefail` will make sure `cfgen` fails if error occurs when using pipes
+```
+s3_object_version = /bin/bash -e -o pipefail -c "aws s3api head-object --bucket '${s3_bucket}' --key '${s3_key}' --output=json --query='VersionId' | tr -d '\"' "
+```
 
 ## caching
 You can cache results of evaluation. This is useful when evaluation is slow or requires user input.

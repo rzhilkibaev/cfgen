@@ -1,12 +1,12 @@
 """
 Usage:
-    cfgen FILE [list] [OPTIONS]
+    cfgen FILE [list] [OPTIONS] [--overwrite]
 
 Commands:
     list          list variables and their values
 
 Options:
-    --force   overwrite existing file
+    --overwrite   overwrite existing file
 
 metaconfig cache
 .cfgen.cache
@@ -59,7 +59,7 @@ def main():
     if args["list"]:
         cmd_list(target_file)
     else:
-        cmd_write(target_file)
+        cmd_write(target_file, args.get("--overwrite"))
 
 
 def cmd_list(target_file_name):
@@ -69,8 +69,8 @@ def cmd_list(target_file_name):
         print(name, value)
 
 
-def cmd_write(target_file_name):
-    if os.path.exists(target_file_name):
+def cmd_write(target_file_name, overwrite_target):
+    if os.path.exists(target_file_name) and not overwrite_target:
         raise ValueError(target_file_name + " already exists")
     expressions, values = load_all(target_file_name)
     values = evaluate_expressions(expressions, values)
